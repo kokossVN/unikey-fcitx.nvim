@@ -30,4 +30,4 @@ return {{"kokossVN/unikey-fcitx.nvim"}}
 
 - [fcitx.vim](https://github.com/lilydjwg/fcitx.vim)
 - [vim-barbaric](https://github.com/rlue/vim-barbaric)
-- [h-hg/fcitx.nvim] (https://github.com/h-hg/fcitx.nvim)
+- [h-hg/fcitx.nvim](https://github.com/h-hg/fcitx.nvim)
