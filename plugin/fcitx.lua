@@ -23,8 +23,7 @@ end
 
 function _Fcitx2en()
 	local input_status = vim.fn.system("fcitx5-remote -n")
-	local keyboard = "keyboard-us"
-	if input_status ~= keyboard then
+	if input_status ~= "keyboard-us" then
 		-- input_toggle_flag means whether to restore the state of fcitx
 		vim.b.input_toggle_flag = true
 		-- switch to English input
