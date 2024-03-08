@@ -49,23 +49,18 @@ local function _FcitxInit()
 	augroup("fcitx", {
 		clear = true,
 	})
-	if vim.g.unikey_bydefault == true then
-		autocmd({
-			{ "InsertLeave", "CmdlineLeave" },
-			{
-				group = "fcitx",
-				callback = function()
-					_Fcitx2en()
-				end,
-			},
-
-			{ "InsertEnter", "CmdlineEnter" },
-			{
-				group = "fcitx",
-				callback = function()
-					_Fcitx2Unikey()
-				end,
-			},
+	if vim.b.unikey_bydefault == true then
+		autocmd({ "InsertEnter", "CmdlineEnter" }, {
+			group = "fcitx",
+			callback = function()
+				_Fcitx2Unikey()
+			end,
+		})
+		autocmd({ "InsertLeave", "CmdlineLeave" }, {
+			group = "fcitx",
+			callback = function()
+				_Fcitx2en()
+			end,
 		})
 	else
 		autocmd({ "InsertLeave", "CmdlineLeave" }, {
