@@ -82,7 +82,7 @@ local function _FcitxInit()
 		})
 		autocmd({ "CmdlineLeave" }, {
 			group = "fcitx",
-			parttern = { match = "\\?/?" },
+			parttern = { match = "[/?]?" },
 			callback = function()
 				_Fcitx2en()
 			end,
