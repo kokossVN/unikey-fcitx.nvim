@@ -47,21 +47,42 @@ local function _FcitxInit()
 		clear = true,
 	})
 	if vim.g.unikey_bydefault == true then
-		autocmd({ "InsertEnter", "CmdlineEnter" }, {
+		autocmd({ "InsertEnter" }, {
 			group = "fcitx",
 			callback = function()
 				_Fcitx2Unikey()
 			end,
 		})
-		autocmd({ "InsertLeave", "CmdlineLeave" }, {
+		autocmd({ "CmdlineEnter" }, {
+			group = "fcitx",
+			parttern = { match = "\\?/?" },
+			callback = function()
+				_Fcitx2Unikey()
+			end,
+		})
+		autocmd({ "InsertLeave" }, {
 			group = "fcitx",
 			callback = function()
 				_Fcitx2en()
 			end,
 		})
-	else
-		autocmd({ "InsertLeave", "CmdlineLeave" }, {
+		autocmd({ "CmdlineLeave" }, {
 			group = "fcitx",
+			parttern = { match = "\\?/?" },
+			callback = function()
+				_Fcitx2en()
+			end,
+		})
+	else
+		autocmd({ "InsertLeave" }, {
+			group = "fcitx",
+			callback = function()
+				_Fcitx2en()
+			end,
+		})
+		autocmd({ "CmdlineLeave" }, {
+			group = "fcitx",
+			parttern = { match = "\\?/?" },
 			callback = function()
 				_Fcitx2en()
 			end,
