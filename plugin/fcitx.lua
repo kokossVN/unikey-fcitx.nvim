@@ -49,12 +49,32 @@ local function _FcitxInit()
 	augroup("fcitx", {
 		clear = true,
 	})
-	autocmd({ "InsertLeave", "CmdlineLeave" }, {
-		group = "fcitx",
-		callback = function()
-			_Fcitx2en()
-		end,
-	})
+	if vim.b.unikey_bydefault == true then
+		autocmd({
+			{ "InsertLeave", "CmdlineLeave" },
+			{
+				group = "fcitx",
+				callback = function()
+					_Fcitx2en()
+				end,
+			},
+
+			{ "InsertEnter", "CmdlineEnter" },
+			{
+				group = "fcitx",
+				callback = function()
+					_Fcitx2Unikey()
+				end,
+			},
+		})
+	else
+		autocmd({ "InsertLeave", "CmdlineLeave" }, {
+			group = "fcitx",
+			callback = function()
+				_Fcitx2en()
+			end,
+		})
+	end
 	--Insert to Unikey
 	vim.keymap.set("n", "<A-i>", ":lua _Fcitx2Unikey()<CR>i", { silent = true, noremap = true })
 end
