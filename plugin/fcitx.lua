@@ -46,9 +46,9 @@ end
 
 local function _FcitxInit()
 	--create augroup fcitx (but im not sure is does)
-	-- augroup("fcitx", {
-	-- 	clear = true,
-	-- })
+	augroup("fcitx", {
+		clear = true,
+	})
 	autocmd({ "InsertLeave", "CmdlineLeave" }, {
 		group = "fcitx",
 		callback = function()
