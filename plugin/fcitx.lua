@@ -46,18 +46,13 @@ end
 
 local function _FcitxInit()
 	augroup("fcitx", {
-		clear = {
-			autocmd("InsertLeave", {
-				callback = function()
-					_Fcitx2en()
-				end,
-			}),
-			autocmd("CmdlineLeave", {
-				callback = function()
-					_Fcitx2en()
-				end,
-			}),
-		},
+		clear = true,
+	})
+	autocmd({ "InsertLeave", "CmdlineLeave" }, {
+		group = "fcitx",
+		callback = function()
+			_Fcitx2en()
+		end,
 	})
 end
 -- local init = {
