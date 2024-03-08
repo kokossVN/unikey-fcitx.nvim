@@ -49,7 +49,7 @@ local function _FcitxInit()
 	augroup("fcitx", {
 		clear = true,
 	})
-	if vim.b.unikey_bydefault == true then
+	if vim.g.unikey_bydefault == true then
 		autocmd({ "InsertEnter", "CmdlineEnter" }, {
 			group = "fcitx",
 			callback = function()
