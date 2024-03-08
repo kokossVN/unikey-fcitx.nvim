@@ -32,6 +32,7 @@ function _Fcitx2en()
 		-- switch to English input
 		vim.fn.system(fcitx_cmd .. " -s keyboard-us")
 	end
+	return true
 end
 
 function _Fcitx2Unikey()
@@ -42,6 +43,7 @@ function _Fcitx2Unikey()
 		vim.fn.system(fcitx_cmd .. " -s unikey")
 		vim.b.input_toggle_flag = false
 	end
+	return true
 end
 
 local function _FcitxInit()
