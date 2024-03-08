@@ -2,6 +2,7 @@
 local fcitx_cmd = ""
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
+local M = {}
 
 if vim.fn.executable("fcitx-remote") == 1 then
 	fcitx_cmd = "fcitx-remote"
@@ -55,17 +56,5 @@ local function _FcitxInit()
 		end,
 	})
 end
--- local init = {
--- 	vim.cmd([[
--- 	   augroup fcitx
--- 	     " au InsertEnter * :lua _Fcitx2Unikey()
--- 	     au InsertLeave * :lua _Fcitx2en()
--- 	     " au CmdlineEnter [/\?] :lua _Fcitx2Unikey()
--- 	     au CmdlineLeave [/\?] :lua _Fcitx2en()
--- 	   augroup END
--- 	 ]]),
--- }
-local init = {
-	fcitxinit = _FcitxInit(),
-}
-return init
+M.init(_FcitxInit())
+return M
