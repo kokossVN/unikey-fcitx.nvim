@@ -41,11 +41,14 @@ function _Fcitx2Unikey()
 	end
 end
 
-vim.cmd([[
-  augroup fcitx
-    au InsertEnter * :lua _Fcitx2Unikey()
-    au InsertLeave * :lua _Fcitx2en()
-    au CmdlineEnter [/\?] :lua _Fcitx2Unikey()
-    au CmdlineLeave [/\?] :lua _Fcitx2en()
-  augroup END
-]])
+local init = {
+	vim.cmd([[
+    augroup fcitx
+      au InsertEnter * :lua _Fcitx2Unikey()
+      au InsertLeave * :lua _Fcitx2en()
+      au CmdlineEnter [/\?] :lua _Fcitx2Unikey()
+      au CmdlineLeave [/\?] :lua _Fcitx2en()
+    augroup END
+  ]]),
+}
+return init
