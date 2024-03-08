@@ -45,15 +45,18 @@ function _Fcitx2Unikey()
 end
 
 local function _FcitxInit()
-	augroup("fcitx", {
-		clear = true,
-	})
+	--create augroup fcitx (but im not sure is does)
+	-- augroup("fcitx", {
+	-- 	clear = true,
+	-- })
 	autocmd({ "InsertLeave", "CmdlineLeave" }, {
 		group = "fcitx",
 		callback = function()
 			_Fcitx2en()
 		end,
 	})
+	--Insert to Unikey
+	vim.keymap.set("n", "<A-i>", ":lua _Fcitx2Unikey()<CR>i", { silent = true, noremap = true })
 end
 
 local init = {
