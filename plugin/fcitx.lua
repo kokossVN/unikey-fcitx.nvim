@@ -2,7 +2,6 @@
 local fcitx_cmd = ""
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
-local M = {}
 
 if vim.fn.executable("fcitx-remote") == 1 then
 	fcitx_cmd = "fcitx-remote"
@@ -56,5 +55,8 @@ local function _FcitxInit()
 		end,
 	})
 end
-M.init(_FcitxInit())
-return M
+
+local init = {
+	start = _FcitxInit(),
+}
+return init
