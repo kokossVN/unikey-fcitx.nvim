@@ -1,5 +1,8 @@
 -- check fcitx-remote (fcitx5-remote)
 local fcitx_cmd = ""
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+
 if vim.fn.executable("fcitx-remote") == 1 then
 	fcitx_cmd = "fcitx-remote"
 elseif vim.fn.executable("fcitx5-remote") == 1 then
@@ -41,11 +44,37 @@ function _Fcitx2Unikey()
 	end
 end
 
-vim.cmd([[
-  augroup fcitx
-    au InsertEnter * :lua _Fcitx2Unikey()
-    au InsertLeave * :lua _Fcitx2en()
-    au CmdlineEnter [/\?] :lua _Fcitx2Unikey()
-    au CmdlineLeave [/\?] :lua _Fcitx2en()
-  augroup END
-]])
+local function _FcitxInit()
+	--create augroup fcitx (but im not sure is does)
+	augroup("fcitx", {
+		clear = true,
+	})
+	if vim.g.unikey_bydefault == true then
+		autocmd({ "InsertEnter", "CmdlineEnter" }, {
+			group = "fcitx",
+			callback = function()
+				_Fcitx2Unikey()
+			end,
+		})
+		autocmd({ "InsertLeave", "CmdlineLeave" }, {
+			group = "fcitx",
+			callback = function()
+				_Fcitx2en()
+			end,
+		})
+	else
+		autocmd({ "InsertLeave", "CmdlineLeave" }, {
+			group = "fcitx",
+			callback = function()
+				_Fcitx2en()
+			end,
+		})
+	end
+	--Insert to Unikey
+	vim.keymap.set("n", "<A-i>", ":lua _Fcitx2Unikey()<CR>i", { silent = true, noremap = true })
+end
+
+local init = {
+	start = _FcitxInit(),
+}
+return init
