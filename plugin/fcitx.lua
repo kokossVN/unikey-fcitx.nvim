@@ -89,7 +89,7 @@ local function _FcitxInit()
 		})
 		autocmd({ "CmdlineLeave" }, {
 			group = "fcitx",
-			pattern = { "[/?:]" },
+			pattern = { "[/:]?" },
 			callback = function()
 				_Fcitx2en()
 			end,
