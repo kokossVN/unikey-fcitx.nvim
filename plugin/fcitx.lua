@@ -55,7 +55,7 @@ local function _FcitxInit()
 		})
 		autocmd({ "CmdlineEnter" }, {
 			group = "fcitx",
-			pattern = { "[/?:]" },
+			pattern = { "[/:\\?]" },
 			callback = function()
 				_Fcitx2Unikey()
 			end,
@@ -68,7 +68,7 @@ local function _FcitxInit()
 		})
 		autocmd({ "CmdlineLeave" }, {
 			group = "fcitx",
-			pattern = { "[/?:]" },
+			pattern = { "[/:\\?]" },
 			callback = function()
 				_Fcitx2en()
 			end,
