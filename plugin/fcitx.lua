@@ -55,7 +55,14 @@ local function _FcitxInit()
 		})
 		autocmd({ "CmdlineEnter" }, {
 			group = "fcitx",
-			pattern = { "/", "[/?]?" },
+			pattern = { "[:]" },
+			callback = function()
+				_Fcitx2en()
+			end,
+		})
+		autocmd({ "CmdlineEnter" }, {
+			group = "fcitx",
+			pattern = { "/", "[/?]" },
 			callback = function()
 				_Fcitx2Unikey()
 			end,
@@ -74,6 +81,13 @@ local function _FcitxInit()
 			end,
 		})
 	else
+		autocmd({ "CmdlineEnter" }, {
+			group = "fcitx",
+			pattern = { "[:]" },
+			callback = function()
+				_Fcitx2en()
+			end,
+		})
 		autocmd({ "InsertLeave" }, {
 			group = "fcitx",
 			callback = function()
