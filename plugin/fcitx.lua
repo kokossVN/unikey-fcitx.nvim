@@ -55,7 +55,7 @@ local function _FcitxInit()
 		})
 		autocmd({ "CmdlineEnter" }, {
 			group = "fcitx",
-			pattern = { "[:]" },
+			pattern = { ":" },
 			callback = function()
 				_Fcitx2en()
 			end,
