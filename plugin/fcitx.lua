@@ -1,4 +1,5 @@
 -- check fcitx-remote (fcitx5-remote)
+print("Hello")
 local fcitx_cmd = ""
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
@@ -42,64 +43,61 @@ function _Fcitx2Unikey()
 end
 
 local function _FcitxInit()
-	if vim.g.vscode then
-	else
-		--create augroup fcitx (but im not sure is does)
-		augroup("fcitx", {
-			clear = true,
+	--create augroup fcitx (but im not sure is does)
+	augroup("fcitx", {
+		clear = true,
+	})
+	if vim.g.unikey_bydefault == true then
+		autocmd({ "InsertEnter" }, {
+			group = "fcitx",
+			callback = function()
+				_Fcitx2Unikey()
+			end,
 		})
-		if vim.g.unikey_bydefault == true then
-			autocmd({ "InsertEnter" }, {
-				group = "fcitx",
-				callback = function()
-					_Fcitx2Unikey()
-				end,
-			})
-			autocmd({ "CmdlineEnter" }, {
-				group = "fcitx",
-				pattern = { "[/:\\?]" },
-				callback = function()
-					_Fcitx2Unikey()
-				end,
-			})
-			autocmd({ "InsertLeave" }, {
-				group = "fcitx",
-				callback = function()
-					_Fcitx2en()
-				end,
-			})
-			autocmd({ "CmdlineLeave" }, {
-				group = "fcitx",
-				pattern = { "[/:\\?]" },
-				callback = function()
-					_Fcitx2en()
-				end,
-			})
-		else
-			autocmd({ "CmdlineEnter" }, {
-				group = "fcitx",
-				pattern = { ":" },
-				callback = function()
-					_Fcitx2en()
-				end,
-			})
-			autocmd({ "InsertLeave" }, {
-				group = "fcitx",
-				callback = function()
-					_Fcitx2en()
-				end,
-			})
-			autocmd({ "CmdlineLeave" }, {
-				group = "fcitx",
-				pattern = { "[/:\\?]" },
-				callback = function()
-					_Fcitx2en()
-				end,
-			})
-		end
-		--Insert to Unikey
-		vim.keymap.set("n", "<A-i>", ":lua _Fcitx2Unikey()<CR>i", { silent = true, noremap = true })
+		autocmd({ "CmdlineEnter" }, {
+			group = "fcitx",
+			pattern = { "[/:\\?]" },
+			callback = function()
+				_Fcitx2Unikey()
+			end,
+		})
+		autocmd({ "InsertLeave" }, {
+			group = "fcitx",
+			callback = function()
+				_Fcitx2en()
+			end,
+		})
+		autocmd({ "CmdlineLeave" }, {
+			group = "fcitx",
+			pattern = { "[/:\\?]" },
+			callback = function()
+				_Fcitx2en()
+			end,
+		})
+	else
+		autocmd({ "CmdlineEnter" }, {
+			group = "fcitx",
+			pattern = { ":" },
+			callback = function()
+				_Fcitx2en()
+			end,
+		})
+		autocmd({ "InsertLeave" }, {
+			group = "fcitx",
+			callback = function()
+				_Fcitx2en()
+			end,
+		})
+		autocmd({ "CmdlineLeave" }, {
+			group = "fcitx",
+			pattern = { "[/:\\?]" },
+			callback = function()
+				_Fcitx2en()
+			end,
+		})
 	end
+	--Insert to Unikey
+	vim.keymap.set("n", "<A-i>", ":lua _Fcitx2Unikey()<CR>i", { silent = true, noremap = true })
 end
 
 local M = {
