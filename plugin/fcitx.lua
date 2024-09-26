@@ -42,6 +42,7 @@ function _Fcitx2Unikey()
 end
 
 local function _FcitxInit()
+	print("hello")
 	--create augroup fcitx (but im not sure is does)
 	augroup("fcitx", {
 		clear = true,
@@ -99,7 +100,7 @@ local function _FcitxInit()
 	vim.keymap.set("n", "<A-i>", ":lua _Fcitx2Unikey()<CR>i", { silent = true, noremap = true })
 end
 
-local init = {
+local M = {
 	start = _FcitxInit(),
 }
-return init
+return M
