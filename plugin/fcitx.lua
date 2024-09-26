@@ -1,4 +1,5 @@
 -- check fcitx-remote (fcitx5-remote)
+print("Hello")
 local fcitx_cmd = ""
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
@@ -42,7 +43,6 @@ function _Fcitx2Unikey()
 end
 
 local function _FcitxInit()
-	print("hello")
 	--create augroup fcitx (but im not sure is does)
 	augroup("fcitx", {
 		clear = true,
