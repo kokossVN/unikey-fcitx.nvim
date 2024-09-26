@@ -99,7 +99,7 @@ local function _FcitxInit()
 	vim.keymap.set("n", "<A-i>", ":lua _Fcitx2Unikey()<CR>i", { silent = true, noremap = true })
 end
 
-local M = {
+local init = {
 	start = _FcitxInit(),
 }
-return M
+return init
