@@ -44,6 +44,7 @@ end
 
 local function _FcitxInit()
 	if vim.g.vscode then
+		print("Hello")
 	else
 		--create augroup fcitx (but im not sure is does)
 		augroup("fcitx", {
