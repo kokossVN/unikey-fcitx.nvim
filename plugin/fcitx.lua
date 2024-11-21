@@ -3,14 +3,13 @@ local fcitx_cmd = ""
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
-
 if os.getenv("SSH_TTY") ~= nil then
   function _Fcitx2en()
-    vim.fn.system("echo 'en' >> /tmp/fcitx5-remote.nvim")
+    vim.fn.system("echo 'keyboard-us' >> /tmp/fcitx5-remote.nvim")
   end
 
   function _Fcitx2Unikey()
-    vim.fn.system("echo 'vi' >> /tmp/fcitx5-remote.nvim")
+    vim.fn.system("echo 'unikey' >> /tmp/fcitx5-remote.nvim")
   end
 else
   if vim.fn.executable("fcitx-remote") == 1 then
@@ -23,9 +22,9 @@ else
 
   local os_name = vim.loop.os_uname().sysname
   if
-      (os_name == "Linux" or os_name == "Unix")
-      and os.getenv("DISPLAY") == nil
-      and os.getenv("WAYLAND_DISPLAY") == nil
+    (os_name == "Linux" or os_name == "Unix")
+    and os.getenv("DISPLAY") == nil
+    and os.getenv("WAYLAND_DISPLAY") == nil
   then
     return
   end
@@ -47,7 +46,6 @@ else
     end
   end
 end
-
 
 local function _FcitxInit()
   --create augroup fcitx (but im not sure is does)
